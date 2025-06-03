@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learn A–Z | Sign Language</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Music toggle button style */
+    #music-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 1000;
+    }
+    /* Grid and card fade-in animation */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #f5f8ff;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 8px;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Learn A–Z in Sign Language</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="quiz.html">Quiz</a>
+    </nav>
+  </header>
+
+  <div class="grid">
+    <div class="card"><img src="assets/images/a.gif" alt="A"><p>A</p></div>
+    <div class="card"><img src="assets/images/b.gif" alt="B"><p>B</p></div>
+    <div class="card"><img src="assets/images/c.gif" alt="C"><p>C</p></div>
+    <div class="card"><img src="assets/images/d.gif" alt="D"><p>D</p></div>
+    <div class="card"><img src="assets/images/e.gif" alt="E"><p>E</p></div>
+    <div class="card"><img src="assets/images/f.gif" alt="F"><p>F</p></div>
+    <div class="card"><img src="assets/images/g.gif" alt="G"><p>G</p></div>
+    <div class="card"><img src="assets/images/h.gif" alt="H"><p>H</p></div>
+    <div class="card"><img src="assets/images/i.gif" alt="I"><p>I</p></div>
+    <div class="card"><img src="assets/images/j.gif" alt="J"><p>J</p></div>
+    <div class="card"><img src="assets/images/k.gif" alt="K"><p>K</p></div>
+    <div class="card"><img src="assets/images/l.gif" alt="L"><p>L</p></div>
+    <div class="card"><img src="assets/images/m.gif" alt="M"><p>M</p></div>
+    <div class="card"><img src="assets/images/n.gif" alt="N"><p>N</p></div>
+    <div class="card"><img src="assets/images/o.gif" alt="O"><p>O</p></div>
+    <div class="card"><img src="assets/images/p.gif" alt="P"><p>P</p></div>
+    <div class="card"><img src="assets/images/q.gif" alt="Q"><p>Q</p></div>
+    <div class="card"><img src="assets/images/r.gif" alt="R"><p>R</p></div>
+    <div class="card"><img src="assets/images/s.gif" alt="S"><p>S</p></div>
+    <div class="card"><img src="assets/images/t.gif" alt="T"><p>T</p></div>
+    <div class="card"><img src="assets/images/u.gif" alt="U"><p>U</p></div>
+    <div class="card"><img src="assets/images/v.gif" alt="V"><p>V</p></div>
+    <div class="card"><img src="assets/images/w.gif" alt="W"><p>W</p></div>
+    <div class="card"><img src="assets/images/x.gif" alt="X"><p>X</p></div>
+    <div class="card"><img src="assets/images/y.gif" alt="Y"><p>Y</p></div>
+    <div class="card"><img src="assets/images/z.gif" alt="Z"><p>Z</p></div>
+  </div>
+
+  <!-- Music player button and audio -->
+  <button id="music-toggle">▶️ Play Music</button>
+  <audio id="bg-music" loop src="assets/music/bg-music.mp3"></audio>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-toggle');
+
+    function updateButton() {
+      btn.textContent = music.paused ? '▶️ Play Music' : '⏸️ Pause Music';
+    }
+
+    const savedState = localStorage.getItem('musicPlaying');
+    if (savedState === 'true') {
+      music.play().catch(() => {});
+    }
+    updateButton();
+
+    btn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        localStorage.setItem('musicPlaying', 'true');
+      } else {
+        music.pause();
+        localStorage.setItem('musicPlaying', 'false');
+      }
+      updateButton();
+    });
+
+    music.addEventListener('pause', updateButton);
+    music.addEventListener('play', updateButton);
+  </script>
+</body>
+</html>
